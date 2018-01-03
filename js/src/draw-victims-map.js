@@ -1,6 +1,8 @@
 import * as L from "leaflet";
 import "leaflet-providers";
 import getTribColor from './getTribColors.js';
+import getJSDateFromExcel from './get-js-date-from-excel.js';
+import {timeFormat} from 'd3';
 
 String.prototype.toTitleCase = function(){
 	// returns string in title case (lower, except for first char)
@@ -16,11 +18,17 @@ function useThisVictim(v){
 	return false
 }
 
+function formatDate(d, formatString){
+	const date_obj = getJSDateFromExcel(d);
+	return timeFormat(formatString)(date_obj);
+}
+
 function generateVictimPopup(v){
 	let retval="";
 	if (v.NAME) retval += `<p><strong>${v.NAME}</strong></p>`;
 	if (v.AGE) retval += `<p>Age: ${v.AGE}</p>`;
 	if (v.RACE) retval += `<p>Race: ${v.RACE.toTitleCase()}</p>`;
+	if (v.RACE) retval += `<p>Died: ${formatDate(v.DATE, "%b. %d, %Y ")}</p>`;
 
 	return retval;
 }
