@@ -6,8 +6,8 @@ module.exports = function(grunt) {
   // You'll also have to install them using a command similar to:
   //     npm install --save jquery
   var VENDOR_LIBRARIES = [
-    //'jquery',
-    //'underscore'
+    'leaflet',
+    'leaflet-providers'
   ];
 
   config.browserify = {
@@ -31,7 +31,13 @@ module.exports = function(grunt) {
         transform: [
           [
             'babelify', {
-              presets: ['es2015']
+              "presets": [
+                ["env", {
+                  "targets": {
+                    "browsers": ["last 2 versions", "ie >= 11"]
+                  }
+                }]
+              ]
             }
           ]
         ]
@@ -74,10 +80,32 @@ module.exports = function(grunt) {
     }
   };
 
+  config.postcss = {
+    options: {
+      processors: [
+        require('autoprefixer')({
+          browsers: [
+            "Android 2.3",
+            "Android >= 4",
+            "Chrome >= 20",
+            "Firefox >= 24",
+            "Explorer >= 8",
+            "iOS >= 6",
+            "Opera >= 12",
+            "Safari >= 6"
+          ]
+        }) 
+      ]
+    },
+    dist: {
+      src: 'css/*.css'
+    }
+  }
+
   config.watch = {
     sass: {
       files: ['sass/**/*.scss'],
-      tasks: ['sass']
+      tasks: ['sass', 'postcss']
     },
     js: {
       files: ['js/src/**/*.js'],
@@ -90,11 +118,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-postcss');
 
   var defaultTasks = [];
 
   defaultTasks.push('sass');
   defaultTasks.push('browserify');
+  defaultTasks.push('postcss');
 
   grunt.registerTask('default', defaultTasks);
 };
