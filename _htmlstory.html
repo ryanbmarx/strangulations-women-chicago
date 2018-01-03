@@ -6,6 +6,7 @@
  #
  #}
 {% block content %}
+<div id='map' class='map'></div>
 {% endblock content %}
 
 {% block library_scripts %}
@@ -16,7 +17,10 @@
 {% block scripts %}
 {# Uncomment this if you are using custom JavaScript #}
 <script src="//{{ ROOT_URL }}/js/app.min.js"></script>
+<script type="text/javascript">
+	window.victims = {{ TOTAL_STRANGULATIONS|tojson }};
 
+</script>
 
 
 <script>

@@ -28,12 +28,24 @@ $desktop-min-width:850px;
 
 
 // ---- IMPORT PROJECT STYLES FROM PARTIAL FILES HERE ---------------------------------------------
-
+@import 'leaflet';
 
 
 // ---- WRITE MORE PROJECT STYLES HERE ---------------------------------------------
 // MOBILE/DEFAULT STYLES ARE HERE.
 
+.map{
+	height: 600px;
+}
+
+.leaflet-popup-content-wrapper{}
+.leaflet-popup-content{
+	p{
+		@include sans-serif();
+		margin: 0;
+		text-align:center;
+	}
+}
 
 .trb_mainContent .credits {
 	p{

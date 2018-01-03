@@ -7,7 +7,8 @@ module.exports = function(grunt) {
   //     npm install --save jquery
   var VENDOR_LIBRARIES = [
     'leaflet',
-    'leaflet-providers'
+    'leaflet-providers',
+    'd3'
   ];
 
   config.browserify = {
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
     options: {
       outputStyle: 'compressed',
       sourceMap: true,
-      includePaths: [ 'sass/', 'node_modules/trib-styles/sass/' ]
+      includePaths: [ 'sass/', 'node_modules/trib-styles/sass/','node_modules/leaflet/dist' ]
     },
     app: {
       files: {
