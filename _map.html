@@ -18,20 +18,29 @@
 			<dd>Case is not closed</dd>
 		</dl>
 
-		<dl class='legend legend--clothed'>
+{# 		<dl class='legend legend--clothed'>
 			<dt><span class='legend__dot--clothed'></span></dt>
 			<dd>Fully clothed</dd>
 			<dt><span class='legend__dot--partially-clothed'></span></dt>
 			<dd>Partially clothed</dd>
 			<dt><span class='legend__dot--naked'></span></dt>
 			<dd>Naked</dd>
-		</dl>
-		<select class='filter'>
+		</dl> #}
+{# 		<select class='filter'>
 			<option selected disabled>Filter by ...</option>
 			<option value='age'>Age</option>
 			<option value='year'>Year of death</option>
 			<option value='case'>Case status</option>
-		</select>
+		</select> #}
+		<div class='slider'>
+			<label for="year">Filter by year of death:</label>
+			<span class='slider__min'>All years &raquo;</span>
+			<div class='slider__input'>
+				<span id='chosen-year'></span>
+				<input id="year-slider" value='2000' type="range" name="year" min="2000" max="2017" step="1">
+			</div>
+			<span class='slider__max'>&laquo; 2017</span>
+		</div>
 		<section id='map' class='map'></section>
 		<section class='credits'>
 			{{ sources|markdown }}

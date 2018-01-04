@@ -87,7 +87,7 @@ html, body{
 	&.legend--visible{
 		display:block;
 	}
-	
+
 	.legend__dot--closed{
 		@extend %legend__dot;
 		background-color: $closed-color;
@@ -135,11 +135,72 @@ html, body{
 	}
 }
 
+.slider{
+	@include sans-serif();
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	flex-wrap:wrap;
+	margin: 0 0 10px 0;
+	position:relative;
 
+	.slider__input{
+		flex: 1;
+		margin: 0 5px;
+		position:relative;
+	}
+
+	input{
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		transform: translate(0,4px); // a nudge to vertically center it.
+	}
+
+	label{
+		font-weight: bold;
+		margin-right: 10px;
+		width: 100%;
+	}
+
+	.slider__min{
+		text-align:left;
+		font-size: 13px;
+	}
+	.slider__max{
+		text-align:right;
+		font-size: 13px;
+	}
+
+	#chosen-year{
+		position:absolute;
+		bottom: 100%;
+		transform: translate(-50%,0);
+		font-weight: bold;
+	}
+}
 @media all and (min-width: $tablet-min-width){
 	// ONLY CHANGES FOR TABLETS + DESKTOPS	
 }
 
 @media all and (min-width: $desktop-min-width){
 	// ONLY CHANGES FOR DESKTOPS
+
+	.slider{
+		flex-wrap:nowrap;
+
+		label{
+			width: auto;
+		}
+	}
+
+	.legend{
+		position: absolute;
+		top: 100px;
+		right: 50px;
+		z-index: 1000;
+		background: rgba(white, .85);
+		padding: 10px;
+
+	}
 }
