@@ -35,13 +35,60 @@ function useThisVictim(v){
 }
 
 function formatDate(d, formatString){
-	const date_obj = getJSDateFromExcel(d);
-	return timeFormat(formatString)(date_obj);
+	/*
+		Takes a datetime object and formats it. 
+		It then seeks poorly abbreviated months 
+		and replaces them with AP style
+	*/
+	
+	const 	date_obj = getJSDateFromExcel(d),
+			month = date_obj.getMonth();
+
+	let retval = timeFormat(formatString)(date_obj);
+	switch (month){
+		case 0:
+			return retval.replace('Jan ', 'Jan. ')
+			break;
+		case 1:
+			return retval.replace('Feb ', 'Feb. ')
+			break;
+		case 2:
+			return retval.replace('Mar ', 'March ')
+			break;
+		case 3:
+			return retval.replace('Apr ', 'April ')
+			break;
+		// case 4:
+		// 	return retval.replace('May ', 'Jan. ')
+		// 	break;
+		case 5:
+			return retval.replace('Jun ', 'June ')
+			break;
+		case 6:
+			return retval.replace('Jul ', 'July ')
+			break;
+		case 7:
+			return retval.replace('Aug ', 'Aug. ')
+			break;
+		case 8:
+			return retval.replace('Sep ', 'Sept. ')
+			break;
+		case 9:
+			return retval.replace('Oct ', 'Oct. ')
+			break;
+		case 10:
+			return retval.replace('Nov ', 'Nov. ')
+			break;
+		case 11:
+			return retval.replace('Dec ', 'Dec. ')
+			break;
+	}
+	return retval;
 }
-function generateFoundSenetence(v){
+function generateFoundSentence(v){
 
 	// Takes the data and crafts a "she was found naked in a ..." sentence
-	let retval = `<p class='popup__name'><strong>${v.NAME.trim().toTitleCase()}</strong> was found <strong>`;
+	let retval = `<strong>${v.NAME.trim().toTitleCase()}</strong> was found <strong>`;
 
 	if (v.CLOTHED) {
 		if (v.CLOTHED.toUpperCase() == "YES") retval += "fully clothed";
@@ -52,14 +99,14 @@ function generateFoundSenetence(v){
 	}
 
 	if (v.PLACE) retval += ` ${v.PLACE}`;
-	retval += ".</p>"
+	retval += ". "
 	return retval;
 }
 
 
 function generateVictimPopup(v){
-	let retval=generateFoundSenetence(v);
-	if (v.DATE && v.AGE) retval += `<p class='popup__died'>She died <strong>${formatDate(v.DATE, "%b %-d, %Y ")}</strong> at age <strong>${v.AGE}</strong>.</p>`;
+	let retval="<p>" + generateFoundSentence(v);
+	if (v.DATE && v.AGE) retval += `She died <strong>${formatDate(v.DATE, "%b %-d, %Y")},</strong> at age <strong>${v.AGE}</strong>.</p>`;
 	if (v.CLOSED) retval += `<p><strong>Case closed:</strong> ${v.CLOSED.toSentenceCase()}</p>`;	
 
 	return retval;
