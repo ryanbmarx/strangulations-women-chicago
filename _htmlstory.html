@@ -7,35 +7,24 @@
  #}
 {% block content %}
 
-
-
-<section class='columns'>
-	<div class='map-wrapper'>
-		<div id='map' class='map'></div>
-	</div>
-	{% include "_viz.html" %}
-</section>
-
-
-
-
+{% include "_map.html" %}
 
 {% endblock content %}
 
 {% block library_scripts %}
 {# Uncomment this if you are using libraries such as jQuery #}
-<script src="//{{ ROOT_URL }}/js/vendor.min.js"></script>
+{# <script src="//{{ ROOT_URL }}/js/vendor.min.js"></script> #}
 {% endblock %}
 
 {% block scripts %}
 {# Uncomment this if you are using custom JavaScript #}
-<script src="//{{ ROOT_URL }}/js/app.min.js"></script>
-<script type="text/javascript">
-	window.victims = {{ TOTAL_STRANGULATIONS|tojson }};
-</script>
+{# <script src="//{{ ROOT_URL }}/js/app.min.js"></script> #}
+{# <script type="text/javascript"> #}
+	{# window.victims = {{ TOTAL_STRANGULATIONS|tojson }}; #}
+{# </script> #}
 
 
-<script>
+{# <script>
 (function(document) {
   var CSS = [
     "//{{ ROOT_URL }}/css/styles.css"
@@ -47,5 +36,5 @@
     document.head.appendChild(link);
   });
 })(document);
-</script>
+</script> #}
 {% endblock scripts %}
