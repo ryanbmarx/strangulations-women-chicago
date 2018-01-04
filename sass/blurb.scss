@@ -89,7 +89,7 @@ html, body{
 
 .legend{
 	@include trib-legend(inline);
-	margin: 0 0 10px 0;
+	margin: 0 0 0 0;
 	display:none;
 
 	&.legend--visible{
@@ -120,8 +120,11 @@ html, body{
 }
 
 .note, .trb_mainContent .note{
-	@include sans-serif();
 	margin: 0 0 10px 0;
+	p{
+		@include sans-serif();
+		margin: 0 0 10px 0;
+	}
 }
 
 .credits, .trb_mainContent .credits {
@@ -135,7 +138,6 @@ html, body{
 	@include sans-serif();
 	margin: 0 0 10px 0;
 	position:relative;
-
 	.slider__input{
 		flex: 1;
 		margin: 0;
@@ -190,21 +192,31 @@ html, body{
 @media all and (min-width: $desktop-min-width){
 	// ONLY CHANGES FOR DESKTOPS
 
-	// .slider{
-	// 	// flex-wrap:nowrap;
+	.note, .trb_mainContent .note {
+	    margin: 0 0 10px 0;
+	    display: flex;
+	    justify-content: flex-start;
+	    align-items: center;
+	
+		p{
+			margin:0;
+			&:after{
+				content:":";
+				margin-right: 10px;
+			}
+		}
+	}
 
-	// 	// label{
-	// 	// 	width: auto;
-	// 	// }
-	// }
-
-	.legend{
+	.slider{
+		max-width: 400px;
+		width: 100%;
+		background: white;
+		padding: 15px;
+		box-sizing: border-box;
 		position: absolute;
-		top: 180px;
-		right: 50px;
+		right: 20px;
+		top: 90px;
 		z-index: 1000;
-		background: rgba(white, .85);
-		padding: 10px;
-
+		box-shadow: 2px 2px 3px rgba(black, .7);
 	}
 }

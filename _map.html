@@ -11,12 +11,6 @@
 <body>
 	<div class='map-wrapper'>
 		<h1 class='headline'>{{ headline }}</h1>
-		<dl class='legend legend--case-status legend--visible'>
-			<dt><span class='legend__dot--closed'></span></dt>
-			<dd>Case closed</dd>
-			<dt><span class='legend__dot--not-closed'></span></dt>
-			<dd>Case closed</dd>
-		</dl>
 		<div class='slider'>
 			<label for="year">Slide to filter by year of death:</label>
 			<div class='histogram' style="height: 75px; width: 100%;"></div>
@@ -27,7 +21,15 @@
 			</div>
 			{# <span class='slider__max'>&laquo; 2017</span> #}
 		</div>
-		<p class='note'><em>Click on a dot for more information</em></p>
+		<div class='note'>
+		<p ><em>Click on a dot for more information</em></p>
+		<dl class='legend legend--case-status legend--visible'>
+			<dt><span class='legend__dot--closed'></span></dt>
+			<dd>Case closed</dd>
+			<dt><span class='legend__dot--not-closed'></span></dt>
+			<dd>Not closed</dd>
+		</dl>
+	</div>
 		<section id='map' class='map'></section>
 		<section class='credits'>
 			{{ sources|markdown }}
