@@ -114,8 +114,8 @@ module.exports = function drawVictimsMap(container, data){
 		opacity: 0.5 
 	}).addTo(map);
 
-	const 	victimMarkers = L.layerGroup({}),
-			masterVictimMarkers = L.layerGroup({});
+	const 	victimMarkers = L.featureGroup({}),
+			masterVictimMarkers = L.featureGroup({});
 
 	data.forEach(v => {
 		// V FOR VICTIM
@@ -182,6 +182,12 @@ module.exports = function drawVictimsMap(container, data){
 					l.removeFrom(victimMarkers);
 				}
 			});	
+			try{
+				map.fitBounds(victimMarkers.getBounds());
+			}
+			catch(e){
+				// do nothing.
+			}
 		}
 	})
 
