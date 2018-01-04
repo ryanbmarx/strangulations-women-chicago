@@ -6,7 +6,20 @@
  #
  #}
 {% block content %}
-<div id='map' class='map'></div>
+
+
+
+<section class='columns'>
+	<div class='map-wrapper'>
+		<div id='map' class='map'></div>
+	</div>
+	{% include "_viz.html" %}
+</section>
+
+
+
+
+
 {% endblock content %}
 
 {% block library_scripts %}
@@ -19,7 +32,6 @@
 <script src="//{{ ROOT_URL }}/js/app.min.js"></script>
 <script type="text/javascript">
 	window.victims = {{ TOTAL_STRANGULATIONS|tojson }};
-
 </script>
 
 

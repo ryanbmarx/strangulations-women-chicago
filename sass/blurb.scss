@@ -1,6 +1,12 @@
 // Enables Tribune colors, but is required for everything.
 @import 'base-variables';
 
+$closed-not-color: $trib-orange;
+$closed-color: $trib-red2;
+
+$map-height--mobile: 350px;
+$map-height--desktop: 450px;
+
 // ---- ADD MORE VARIABLES HERE ---------------------------------------------
 // Breakpoints
 $tablet-min-width:450px;
@@ -29,26 +35,59 @@ $desktop-min-width:850px;
 
 // ---- IMPORT PROJECT STYLES FROM PARTIAL FILES HERE ---------------------------------------------
 @import 'leaflet';
-@import 'viz';
-
 
 // ---- WRITE MORE PROJECT STYLES HERE ---------------------------------------------
 // MOBILE/DEFAULT STYLES ARE HERE.
 
+html, body{
+	margin: 0;
+	padding: 0;
+	background: black;;
+}
+
+.headline{
+	@include label6();
+	margin: 0 0 10px 0;
+}
+
 .map-wrapper{
-	flex: 1;
-	margin-right: 50px;
+	// flex: 1;
+	// margin-right: 50px;
+	max-width: 1060px;
+	margin: 0 auto;
+	max-height: 568px;
+	background: white;
+	overflow:hidden;
 }
 
 .map{
-	height: 600px;
+	height: $map-height--mobile;
 }
 
-.columns{
-	display:flex;
-	justify-content: space-between;
-	align-items: stretch;
+
+.legend{
+	@include trib-legend();
+	margin: 0 0 10px 0;
+	%legend__dot{
+		@include trib-legend__box(50%);
+	}
+
+	.legend__dot--closed{
+		@extend %legend__dot;
+		background-color: $closed-color;
+	}
+
+	.legend__dot--not-closed{
+		@extend %legend__dot;
+		background-color: $closed-not-color;
+	}
 }
+
+.age-filter{
+	width: 100%;
+	padding: 5px;
+}
+// LEAFLET POPUP
 
 .leaflet-popup-content-wrapper{}
 .leaflet-popup-content{
@@ -59,7 +98,7 @@ $desktop-min-width:850px;
 	}
 }
 
-.trb_mainContent .credits {
+.credits, .trb_mainContent .credits {
 	p{
 		@include agate();
 	}

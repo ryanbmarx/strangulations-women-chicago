@@ -3,6 +3,24 @@
 """
 Tarbell project configuration
 """
+from flask import Blueprint, g, render_template
+import ftfy
+import jinja2
+# import xlrd
+# from markupsafe import Markup
+# import json
+# import datetime
+
+blueprint = Blueprint('strangulations-women', __name__)
+
+# @blueprint.app_template_filter('get_years')
+# @blueprint.app_template_global('get_labels')
+# @jinja2.contextfilter
+@blueprint.app_template_filter('get_ages')
+def get_ages(victims):
+	pass
+
+
 
 # Google spreadsheet key
 SPREADSHEET_KEY = "15HueUOBXSxYKQbIFhBw20gCIsJ87L0sw8kJkwq0oP10"

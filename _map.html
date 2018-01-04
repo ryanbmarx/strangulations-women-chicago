@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+	<script type="text/javascript" src="//{{ ROOT_URL }}/js/vendor.min.js"></script>
+	<script type="text/javascript">
+		window.victims = {{ TOTAL_STRANGULATIONS|tojson }};
+	</script>
+	<link rel="stylesheet" type="text/css" href="//{{ ROOT_URL }}/css/blurb.css">
+</head>
+<body>
+	<div class='map-wrapper'>
+		<h1 class='headline'>{{ headline }}</h1>
+		<dl class='legend'>
+			<dt><span class='legend__dot--closed'></span></dt>
+			<dd>Case is closed</dd>
+			<dt><span class='legend__dot--not-closed'></span></dt>
+			<dd>Case is not closed</dd>
+		</dl>
+		<select class='age-filter'>
+			<option selected disabled>Filter by age</option>
+			<option value=false>Show all ages</option>
+			<option value=10>Teens</option>
+			<option value=18>20s</option>
+			<option value=30>30s</option>
+			<option value=40>40s</option>
+			<option value=50>50s</option>
+			<option value=60>60s</option>
+			<option value=70>70s and older</option>
+		</select>
+		<section id='map' class='map'></section>
+		<section class='credits'>
+			{{ sources|markdown }}
+			{{ credit|markdown }}
+		</section>
+	</div>
+	<script type="text/javascript" src="//{{ ROOT_URL }}/js/app.min.js"></script>
+</body>
+</html>
