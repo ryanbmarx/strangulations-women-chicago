@@ -37,6 +37,7 @@
   "dependencies": {
     "d3": "^4.12.2",
     "leaflet": "^1.2.0",
-    "leaflet-providers": "^1.1.17"
+    "leaflet-providers": "^1.1.17",
+    "lodash.countby": "^4.6.0"
   }
 }

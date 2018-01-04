@@ -62,7 +62,7 @@ function generateFoundSenetence(v){
 function generateVictimPopup(v){
 	let retval=generateFoundSenetence(v);
 	// if (v.NAME) retval += `<p><strong>${v.NAME.trim().toTitleCase()}</strong></p>`;
-	if (v.DATE && v.AGE) retval += `<p class='popup__died'>She died <strong>${formatDate(v.DATE, "%b %-d, %Y ")}</strong> at age <strong>${v.AGE}</strong></p>`;
+	if (v.DATE && v.AGE) retval += `<p class='popup__died'>She died <strong>${formatDate(v.DATE, "%b %-d, %Y ")}</strong> at age <strong>${v.AGE}</strong>.</p>`;
 	// if (v.AGE) retval += `<p><strong>Age:</strong> </p>`;
 	if (v.CLOSED) retval += `<p><strong>Case closed:</strong> ${v.CLOSED.toSentenceCase()}</p>`;
 
@@ -174,14 +174,14 @@ module.exports = function drawVictimsMap(container, data){
 		
 		const chosenYear = this.value < 2001 ? "All years" : this.value;
 
-		console.log(chosenYear)
-		document.querySelector('#chosen-year').innerHTML = chosenYear;
+		// console.log(chosenYear)
+		// document.querySelector('#chosen-year').innerHTML = chosenYear;
 
-		const sliderPos = (this.value - this.min) / (this.max - this.min),
-		pixelPostion = this.clientWidth * sliderPos;
+		// const sliderPos = (this.value - this.min) / (this.max - this.min),
+		// pixelPostion = this.clientWidth * sliderPos;
 		//this is your pixel value
-		document.querySelector('#chosen-year').setAttribute('style', `left:${sliderPos * 100}%`);
-		console.log(pixelPostion);
+		// document.querySelector('#chosen-year').setAttribute('style', `left:${sliderPos * 100}%`);
+		// console.log(pixelPostion);
 		
 		if(chosenYear == "All years"){
 			console.log('show all')

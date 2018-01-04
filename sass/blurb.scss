@@ -98,19 +98,19 @@ html, body{
 		background-color: $closed-not-color;
 	}
 
-	.legend__dot--clothed{
-		@extend %legend__dot;
-		background-color: $clothes-fully-color;
+	// .legend__dot--clothed{
+	// 	@extend %legend__dot;
+	// 	background-color: $clothes-fully-color;
 
-	}
-	.legend__dot--naked{
-		@extend %legend__dot;
-		background-color: $clothes-naked-color;
-	}
-	.legend__dot--partially-clothed{
-		@extend %legend__dot;
-		background-color: $clothes-partial-color;
-	}
+	// }
+	// .legend__dot--naked{
+	// 	@extend %legend__dot;
+	// 	background-color: $clothes-naked-color;
+	// }
+	// .legend__dot--partially-clothed{
+	// 	@extend %legend__dot;
+	// 	background-color: $clothes-partial-color;
+	// }
 }
 
 .age-filter{
@@ -125,7 +125,13 @@ html, body{
 		@include sans-serif();
 		margin: 0;
 		text-align:center;
+		max-width: 200px;
 	}
+}
+
+.note, .trb_mainContent .note{
+	@include sans-serif();
+	margin: 0 0 10px 0;
 }
 
 .credits, .trb_mainContent .credits {
@@ -146,8 +152,9 @@ html, body{
 
 	.slider__input{
 		flex: 1;
-		margin: 0 5px;
+		margin: 0 5px 0 23px;
 		position:relative;
+
 	}
 
 	input{
@@ -179,6 +186,7 @@ html, body{
 		font-weight: bold;
 	}
 }
+
 @media all and (min-width: $tablet-min-width){
 	// ONLY CHANGES FOR TABLETS + DESKTOPS	
 }
