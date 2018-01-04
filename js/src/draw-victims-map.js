@@ -42,7 +42,7 @@ function formatDate(d, formatString){
 function generateFoundSenetence(v){
 
 	// Takes the data and crafts a "she was found naked in a ..." sentence
-	let retval = "<p>She was found <strong>";
+	let retval = `<p class='popup__name'><strong>${v.NAME.trim().toTitleCase()}</strong> was found <strong>`;
 
 	if (v.CLOTHED) {
 		if (v.CLOTHED.toUpperCase() == "YES") retval += "fully clothed";
@@ -51,7 +51,7 @@ function generateFoundSenetence(v){
 		
 		retval += "</strong>";
 	}
-	console.log(v)
+	// console.log(v)
 
 	if (v.PLACE) retval += ` ${v.PLACE}`;
 	retval += ".</p>"
@@ -60,11 +60,10 @@ function generateFoundSenetence(v){
 
 
 function generateVictimPopup(v){
-	let retval="";
-	if (v.NAME) retval += `<p><strong>${v.NAME.trim().toTitleCase()}</strong></p>`;
+	let retval=generateFoundSenetence(v);
+	// if (v.NAME) retval += `<p><strong>${v.NAME.trim().toTitleCase()}</strong></p>`;
 	if (v.DATE) retval += `<p><strong>Died:</strong> ${formatDate(v.DATE, "%b. %-d, %Y ")}</p>`;
 	if (v.AGE) retval += `<p><strong>Age:</strong> ${v.AGE}</p>`;
-	retval += generateFoundSenetence(v);
 	if (v.CLOSED) retval += `<p><strong>Case closed:</strong> ${v.CLOSED.toSentenceCase()}</p>`;
 
 	// if (v.RACE) retval += `<p>Race: ${v.RACE.toTitleCase()}</p>`;
@@ -115,7 +114,7 @@ module.exports = function drawVictimsMap(container, data){
 		}
 	);
 
-	L.tileLayer.provider('OpenStreetMap.BlackAndWhite').addTo(map);
+	L.tileLayer.provider('Stamen.TonerLite').addTo(map);
 
 	// ADDS CITY MASK
 	L.tileLayer( "http://media.apps.chicagotribune.com/maptiles/chicago-mask/{z}/{x}/{y}.png", { 
@@ -126,6 +125,8 @@ module.exports = function drawVictimsMap(container, data){
 
 	const 	victimMarkers = L.layerGroup({}),
 			masterVictimMarkers = L.layerGroup({});
+
+	data.sort(d => d.DATE);
 
 	data.forEach(v => {
 		// V FOR VICTIM
@@ -168,22 +169,22 @@ module.exports = function drawVictimsMap(container, data){
 		}
 	});
 
-	document.querySelector('.age-filter').addEventListener('change', function(e){
-		const chosenAgeGroup = this.value;
-		console.log(chosenAgeGroup);
-		if(!chosenAgeGroup){
-			masterVictimMarkers.eachLayer( l => {
-				if (l.age && l.age >= chosenAgeGroup && l.age < chosenAgeGroup + 10){
-					l.addTo(victimMarkers)
-				} else {
-					l.removeFrom(victimMarkers);
-				}
-			});	
-		} else {
-			masterVictimMarkers.eachLayer( l => {
-				l.addTo(victimMarkers)
-			});
-		}
-	})
+	// document.querySelector('.age-filter').addEventListener('change', function(e){
+	// 	const chosenAgeGroup = this.value;
+	// 	console.log(chosenAgeGroup);
+	// 	if(!chosenAgeGroup){
+	// 		masterVictimMarkers.eachLayer( l => {
+	// 			if (l.age && l.age >= chosenAgeGroup && l.age < chosenAgeGroup + 10){
+	// 				l.addTo(victimMarkers)
+	// 			} else {
+	// 				l.removeFrom(victimMarkers);
+	// 			}
+	// 		});	
+	// 	} else {
+	// 		masterVictimMarkers.eachLayer( l => {
+	// 			l.addTo(victimMarkers)
+	// 		});
+	// 	}
+	// })
 
 }
