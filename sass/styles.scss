@@ -53,7 +53,7 @@ $desktop-min-width:850px;
 .leaflet-popup-content-wrapper{}
 .leaflet-popup-content{
 	p{
-		@include sans-serif();
+		@include sans-serif-text(15px, 1.4em);
 		margin: 0;
 		text-align:center;
 	}
