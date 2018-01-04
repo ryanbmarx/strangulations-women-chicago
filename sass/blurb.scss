@@ -81,6 +81,7 @@ html, body{
 .map{
 	height: $map-height--mobile;
 	flex: 1;
+	border: 1px solid $trib-gray2;
 }
 
 %legend__dot{
@@ -187,6 +188,14 @@ html, body{
 
 @media all and (min-width: $tablet-min-width){
 	// ONLY CHANGES FOR TABLETS + DESKTOPS	
+	.map{
+		margin-bottom: 5px;
+	}
+	.credits{
+		columns: 2;
+		p{ margin-top: 0; }
+		p + p{ text-align:right;}
+	}
 }
 
 @media all and (min-width: $desktop-min-width){
