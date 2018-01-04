@@ -11,22 +11,26 @@
 <body>
 	<div class='map-wrapper'>
 		<h1 class='headline'>{{ headline }}</h1>
-		<dl class='legend'>
+		<dl class='legend legend--case-status legend--visible'>
 			<dt><span class='legend__dot--closed'></span></dt>
 			<dd>Case is closed</dd>
 			<dt><span class='legend__dot--not-closed'></span></dt>
 			<dd>Case is not closed</dd>
 		</dl>
-		<select class='age-filter'>
-			<option selected disabled>Filter by age</option>
-			<option value=false>Show all ages</option>
-			<option value=10>Teens</option>
-			<option value=18>20s</option>
-			<option value=30>30s</option>
-			<option value=40>40s</option>
-			<option value=50>50s</option>
-			<option value=60>60s</option>
-			<option value=70>70s and older</option>
+
+		<dl class='legend legend--clothed'>
+			<dt><span class='legend__dot--clothed'></span></dt>
+			<dd>Fully clothed</dd>
+			<dt><span class='legend__dot--partially-clothed'></span></dt>
+			<dd>Partially clothed</dd>
+			<dt><span class='legend__dot--naked'></span></dt>
+			<dd>Naked</dd>
+		</dl>
+		<select class='filter'>
+			<option selected disabled>Filter by ...</option>
+			<option value='age'>Age</option>
+			<option value='year'>Year of death</option>
+			<option value='case'>Case status</option>
 		</select>
 		<section id='map' class='map'></section>
 		<section class='credits'>

@@ -4,6 +4,10 @@
 $closed-not-color: $trib-orange;
 $closed-color: $trib-red2;
 
+$clothes-naked-color:$trib-yellow1;
+$clothes-partial-color:$trib-orange;
+$clothes-fully-color:$trib-red2;
+
 $map-height--mobile: 350px;
 $map-height--desktop: 450px;
 
@@ -58,20 +62,32 @@ html, body{
 	max-height: 568px;
 	background: white;
 	overflow:hidden;
+
+	display: flex;
+	flex-flow: column;
+	align-items: stretch;
+	justify-content: space-between;
+	height: 100vh;
 }
 
 .map{
 	height: $map-height--mobile;
+	flex: 1;
 }
 
+%legend__dot{
+	@include trib-legend__box(50%);
+}
 
 .legend{
 	@include trib-legend();
 	margin: 0 0 10px 0;
-	%legend__dot{
-		@include trib-legend__box(50%);
-	}
+	display:none;
 
+	&.legend--visible{
+		display:block;
+	}
+	
 	.legend__dot--closed{
 		@extend %legend__dot;
 		background-color: $closed-color;
@@ -80,6 +96,20 @@ html, body{
 	.legend__dot--not-closed{
 		@extend %legend__dot;
 		background-color: $closed-not-color;
+	}
+
+	.legend__dot--clothed{
+		@extend %legend__dot;
+		background-color: $clothes-fully-color;
+
+	}
+	.legend__dot--naked{
+		@extend %legend__dot;
+		background-color: $clothes-naked-color;
+	}
+	.legend__dot--partially-clothed{
+		@extend %legend__dot;
+		background-color: $clothes-partial-color;
 	}
 }
 
@@ -101,6 +131,7 @@ html, body{
 .credits, .trb_mainContent .credits {
 	p{
 		@include agate();
+		margin:7px 0 0 0;
 	}
 }
 
