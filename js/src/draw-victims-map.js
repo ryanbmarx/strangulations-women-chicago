@@ -62,8 +62,8 @@ function generateFoundSenetence(v){
 function generateVictimPopup(v){
 	let retval=generateFoundSenetence(v);
 	// if (v.NAME) retval += `<p><strong>${v.NAME.trim().toTitleCase()}</strong></p>`;
-	if (v.DATE) retval += `<p><strong>Died:</strong> ${formatDate(v.DATE, "%b. %-d, %Y ")}</p>`;
-	if (v.AGE) retval += `<p><strong>Age:</strong> ${v.AGE}</p>`;
+	if (v.DATE && v.AGE) retval += `<p class='popup__died'>She died <strong>${formatDate(v.DATE, "%b %-d, %Y ")}</strong> at age <strong>${v.AGE}</strong></p>`;
+	// if (v.AGE) retval += `<p><strong>Age:</strong> </p>`;
 	if (v.CLOSED) retval += `<p><strong>Case closed:</strong> ${v.CLOSED.toSentenceCase()}</p>`;
 
 	// if (v.RACE) retval += `<p>Race: ${v.RACE.toTitleCase()}</p>`;
@@ -126,12 +126,12 @@ module.exports = function drawVictimsMap(container, data){
 	const 	victimMarkers = L.layerGroup({}),
 			masterVictimMarkers = L.layerGroup({});
 
-	data.sort(d => d.DATE);
+
+	// data.sort(d => d.DATE);
 
 	data.forEach(v => {
 		// V FOR VICTIM
 		if (useThisVictim(v)){
-
 			//customPopup goes here
 			var customPopup = generateVictimPopup(v);
 
@@ -141,15 +141,15 @@ module.exports = function drawVictimsMap(container, data){
 			}, getVictimIcon(v))
 			.bindPopup(customPopup);
 
-			if (v.AGE) vMarker.age = v.AGE;
+			if (v.DATE) vMarker.year = getJSDateFromExcel(v.DATE).getFullYear();
 
 			vMarker.addTo(victimMarkers);
 			vMarker.addTo(masterVictimMarkers);
 
 		}
 	});
-
 	victimMarkers.addTo(map);
+
 
 	// We want to tweak the style of the markers. By default they are small 
 	// and mostly transparent, but as the map zooms in, we want them to be 
@@ -169,22 +169,34 @@ module.exports = function drawVictimsMap(container, data){
 		}
 	});
 
-	// document.querySelector('.age-filter').addEventListener('change', function(e){
-	// 	const chosenAgeGroup = this.value;
-	// 	console.log(chosenAgeGroup);
-	// 	if(!chosenAgeGroup){
-	// 		masterVictimMarkers.eachLayer( l => {
-	// 			if (l.age && l.age >= chosenAgeGroup && l.age < chosenAgeGroup + 10){
-	// 				l.addTo(victimMarkers)
-	// 			} else {
-	// 				l.removeFrom(victimMarkers);
-	// 			}
-	// 		});	
-	// 	} else {
-	// 		masterVictimMarkers.eachLayer( l => {
-	// 			l.addTo(victimMarkers)
-	// 		});
-	// 	}
-	// })
+
+	document.querySelector('#year-slider').addEventListener('change', function(e){
+		
+		const chosenYear = this.value < 2001 ? "All years" : this.value;
+
+		console.log(chosenYear)
+		document.querySelector('#chosen-year').innerHTML = chosenYear;
+
+		const sliderPos = (this.value - this.min) / (this.max - this.min),
+		pixelPostion = this.clientWidth * sliderPos;
+		//this is your pixel value
+		document.querySelector('#chosen-year').setAttribute('style', `left:${sliderPos * 100}%`);
+		console.log(pixelPostion);
+		
+		if(chosenYear == "All years"){
+			console.log('show all')
+			masterVictimMarkers.eachLayer( l => {
+				l.addTo(victimMarkers)
+			});
+		} else {
+			masterVictimMarkers.eachLayer( l => {
+				if (l.year == chosenYear){
+					l.addTo(victimMarkers)
+				} else {
+					l.removeFrom(victimMarkers);
+				}
+			});	
+		}
+	})
 
 }
