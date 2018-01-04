@@ -172,23 +172,18 @@ module.exports = function drawVictimsMap(container, data){
 
 	document.querySelector('#year-slider').addEventListener('change', function(e){
 		
-		const chosenYear = this.value < 2001 ? "All years" : this.value;
+		const chosenYear = this.value < 2001 ? "All years" : Math.floor(this.value,0);
+		console.log(this.value, chosenYear)
+		if (document.querySelector('.bar--active') != null){
+			document.querySelector('.bar--active').classList.remove('bar--active');
+		}
 
-		// console.log(chosenYear)
-		// document.querySelector('#chosen-year').innerHTML = chosenYear;
-
-		// const sliderPos = (this.value - this.min) / (this.max - this.min),
-		// pixelPostion = this.clientWidth * sliderPos;
-		//this is your pixel value
-		// document.querySelector('#chosen-year').setAttribute('style', `left:${sliderPos * 100}%`);
-		// console.log(pixelPostion);
-		
 		if(chosenYear == "All years"){
-			console.log('show all')
 			masterVictimMarkers.eachLayer( l => {
 				l.addTo(victimMarkers)
 			});
 		} else {
+			document.querySelector(`.bar--${chosenYear}`).classList.add('bar--active');
 			masterVictimMarkers.eachLayer( l => {
 				if (l.year == chosenYear){
 					l.addTo(victimMarkers)
