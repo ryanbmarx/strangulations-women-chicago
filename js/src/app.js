@@ -31,18 +31,26 @@ window.addEventListener('load', function(e){
 	console.log(histoData_arr);
 
 	function yearFormat(year){
-		if (year % 2 != 0) {
+
+		if (window.innerWidth < 650){
+			if (year % 2 != 0) {
+				let retval = year.toString();
+				return `'${retval.slice(2)}`;
+			}			
+		} else {
 			let retval = year.toString();
 			return `'${retval.slice(2)}`;
 		}
-	}
 
+
+	}
+	const bbox = document.querySelector('.histogram').getBoundingClientRect()
 	const histogram = new BarChart({
         container: document.querySelector('.histogram'),
         dataset: histoData_arr, // Will be charted AS IS. All transforms, etc., should be done by now.
         xAttribute:'year', // The key of the x attribute in the data set
         yAttribute:'deaths', // The key of the y attribute in the data set
-        innerMargins:{ top:0,right:0,bottom:15,left:23 }, // This will inset the chart from the base container (which should be controlled by CSS)
+        innerMargins:{ top:0,right:0,bottom:15,left:(bbox.width / 18) }, // This will inset the chart from the base container (which should be controlled by CSS)
         barFillColor:"#aaa", // must be a valid color syntax, #HEX, rgba(), etc.
         axisFormatter: {
         	// These strings will be used with d3.format(<string>)(<number>) on the axes 
