@@ -146,11 +146,13 @@ class BarChart{
 		//	      .========.   mb
 		// ----------------------------------
 
+
+
 		chartInner.selectAll('.bar')
 			.data(data)
 			.enter()
 			.append('rect')
-			.attr('class', d => d[y] >=0 ? "bar bar--positive" : "bar bar--negative")
+			.attr('class', d => d[y] >=0 ? `bar bar--positive bar--${d[x]}` : `bar bar--negative bar--${d[x]}`)
 			.attr('x', d => xScale(d[x]))
 			.attr('y', d => d[y] >=0 ? yScale(0)- Math.abs(yScale(d[y]) - yScale(0)) : yScale(0))
 			.attr("width", xScale.bandwidth())
