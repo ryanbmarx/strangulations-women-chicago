@@ -26,10 +26,6 @@ window.addEventListener('load', function(e){
 	histoData_arr.push({year: 2016, deaths:0})
 
 	histoData_arr.sort((a,b) => a.year - b.year);
-
-
-	console.log(histoData_arr);
-
 	function yearFormat(year){
 
 		if (window.innerWidth < 650){

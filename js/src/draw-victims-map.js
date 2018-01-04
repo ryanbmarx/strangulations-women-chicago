@@ -31,7 +31,6 @@ String.prototype.toTitleCase = function(){
 function useThisVictim(v){
 	// Validate each vic for use on the map. Right now, we just need to confirm coordiantes.
 	if (v.OCC_LAT != undefined && v.OCC_LNG != undefined) return true;
-	// console.log(v, " is false");
 	return false
 }
 
@@ -51,7 +50,6 @@ function generateFoundSenetence(v){
 		
 		retval += "</strong>";
 	}
-	// console.log(v)
 
 	if (v.PLACE) retval += ` ${v.PLACE}`;
 	retval += ".</p>"
@@ -61,13 +59,8 @@ function generateFoundSenetence(v){
 
 function generateVictimPopup(v){
 	let retval=generateFoundSenetence(v);
-	// if (v.NAME) retval += `<p><strong>${v.NAME.trim().toTitleCase()}</strong></p>`;
 	if (v.DATE && v.AGE) retval += `<p class='popup__died'>She died <strong>${formatDate(v.DATE, "%b %-d, %Y ")}</strong> at age <strong>${v.AGE}</strong>.</p>`;
-	// if (v.AGE) retval += `<p><strong>Age:</strong> </p>`;
-	if (v.CLOSED) retval += `<p><strong>Case closed:</strong> ${v.CLOSED.toSentenceCase()}</p>`;
-
-	// if (v.RACE) retval += `<p>Race: ${v.RACE.toTitleCase()}</p>`;
-	
+	if (v.CLOSED) retval += `<p><strong>Case closed:</strong> ${v.CLOSED.toSentenceCase()}</p>`;	
 
 	return retval;
 }
@@ -100,8 +93,6 @@ function restyleVictimMarkers(victimMarkers, o=1, r=5){
 }
 module.exports = function drawVictimsMap(container, data){
 	// draw the map.
-	console.log(data)
-
 	let map = L.map(container,
 		{
 			zoom: 10,
@@ -125,9 +116,6 @@ module.exports = function drawVictimsMap(container, data){
 
 	const 	victimMarkers = L.layerGroup({}),
 			masterVictimMarkers = L.layerGroup({});
-
-
-	// data.sort(d => d.DATE);
 
 	data.forEach(v => {
 		// V FOR VICTIM
@@ -171,18 +159,21 @@ module.exports = function drawVictimsMap(container, data){
 
 
 	document.querySelector('#year-slider').addEventListener('change', function(e){
-		
+		// This powers the filter slider		
 		const chosenYear = this.value < 2001 ? "All years" : Math.floor(this.value,0);
-		console.log(this.value, chosenYear)
+		
 		if (document.querySelector('.bar--active') != null){
+			// remove highlight from bars in the chart
 			document.querySelector('.bar--active').classList.remove('bar--active');
 		}
 
+		// Add/remove relevant markers from map
 		if(chosenYear == "All years"){
 			masterVictimMarkers.eachLayer( l => {
 				l.addTo(victimMarkers)
 			});
 		} else {
+			// highlight the corresponding bar in the chart
 			document.querySelector(`.bar--${chosenYear}`).classList.add('bar--active');
 			masterVictimMarkers.eachLayer( l => {
 				if (l.year == chosenYear){
