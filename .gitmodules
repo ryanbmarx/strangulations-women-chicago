@@ -3,4 +3,4 @@
 	url = git@tribune.unfuddle.com:tribune/tarbell-blueprint-p2p.git
 [submodule "toolbox"]
 	path = toolbox
-	url = https://github.com/ryanbmarx/toolbox.git
+	url = git@github.com:ryanbmarx/toolbox.git
