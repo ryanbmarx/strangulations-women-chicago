@@ -88,17 +88,17 @@ function formatDate(d, formatString){
 function generateFoundSentence(v){
 
 	// Takes the data and crafts a "she was found naked in a ..." sentence
-	let retval = `<strong>${v.NAME.trim().toTitleCase()}</strong> was found <strong>`;
+	let retval = `<strong>${v.NAME.trim().toTitleCase()}</strong> was found `;
 
-	if (v.CLOTHED) {
-		if (v.CLOTHED.toUpperCase() == "YES") retval += "fully clothed";
-		else if (v.CLOTHED.toUpperCase() == "NAKED") retval += "naked";
-		else retval += "partially clothed";
+	// if (v.CLOTHED) {
+	// 	if (v.CLOTHED.toUpperCase() == "YES") retval += "fully clothed";
+	// 	else if (v.CLOTHED.toUpperCase() == "NAKED") retval += "naked";
+	// 	else retval += "partially clothed";
 		
-		retval += "</strong>";
-	}
+	// 	retval += "</strong>";
+	// }
 
-	if (v.PLACE) retval += ` ${v.PLACE}`;
+	if (v.PLACE) retval += ` <strong>${v.PLACE}</strong>`;
 	retval += ". "
 	return retval;
 }
