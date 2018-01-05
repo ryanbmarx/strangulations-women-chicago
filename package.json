@@ -28,6 +28,7 @@
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "^2.0.0",
     "minifyify": "^7.3.3",
+    "remapify": "^2.1.0",
     "trib-styles": "git+ssh://git@tribune.unfuddle.com:tribune/trib-styles.git"
   },
   "browserify": {
