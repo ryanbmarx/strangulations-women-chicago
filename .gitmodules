@@ -1,3 +1,6 @@
 [submodule "_blueprint"]
 	path = _blueprint
 	url = git@tribune.unfuddle.com:tribune/tarbell-blueprint-p2p.git
+[submodule "toolbox"]
+	path = toolbox
+	url = https://github.com/ryanbmarx/toolbox.git
