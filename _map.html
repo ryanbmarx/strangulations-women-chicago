@@ -4,7 +4,7 @@
 	<title>{{ title }}</title>
 	<script type="text/javascript" src="//{{ ROOT_URL }}/js/vendor.min.js"></script>
 	<script type="text/javascript">
-		window.victims = {{ TOTAL_STRANGULATIONS|tojson }};
+		window.victims = {{ TOTAL_STRANGULATIONS|tojson }}.slice(1);
 	</script>
 	<link rel="stylesheet" type="text/css" href="//{{ ROOT_URL }}/css/blurb.css">
 </head>
@@ -14,12 +14,9 @@
 		<div class='slider'>
 			<label for="year">Slide to filter by year of death:</label>
 			<div class='histogram' style="height: 75px; width: 100%;"></div>
-			{# <span class='slider__min'>All years &raquo;</span> #}
 			<div class='slider__input'>
-				{# <span id='chosen-year'></span> #}
 				<input id="year-slider" value='2000' type="range" name="year" min="2000" max="2017" step="1">
 			</div>
-			{# <span class='slider__max'>&laquo; 2017</span> #}
 		</div>
 		<div class='note'>
 		<p ><em>Click on a dot for more information</em></p>
