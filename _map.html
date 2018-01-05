@@ -11,13 +11,6 @@
 <body>
 	<div class='graphic-wrapper'>
 		<h1 class='headline'>{{ headline }}</h1>
-		<div class='slider'>
-			<label for="year">Slide to filter by year of death:</label>
-			<div class='histogram' {# style="height: 75px; width: 100%;" #}></div>
-			<div class='slider__input'>
-				<input id="year-slider" value='2000' type="range" name="year" min="2000" max="2017" step="1">
-			</div>
-		</div>
 		<div class='note'>
 			<p ><em>Click on a dot for more information</em></p>
 			<dl class='legend legend--case-status legend--visible'>
@@ -28,6 +21,13 @@
 			</dl>
 		</div>
 		<div class='map-wrapper'>
+			<div class='slider'>
+				<label for="year">Slide to filter by year of death:</label>
+				<div class='histogram' {# style="height: 75px; width: 100%;" #}></div>
+				<div class='slider__input'>
+					<input id="year-slider" value='2000' type="range" name="year" min="2000" max="2017" step="1">
+				</div>
+			</div>
 			<div id='map' class='map'></div>
 		</div>
 		<div class='credits'>
