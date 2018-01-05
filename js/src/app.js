@@ -28,7 +28,7 @@ window.addEventListener('load', function(e){
 	histoData_arr.sort((a,b) => a.year - b.year);
 	function yearFormat(year){
 
-		if (window.innerWidth < 650){
+		if (window.innerWidth < 650 || window.innerWidth >= 850){
 			if (year % 2 != 0) {
 				let retval = year.toString();
 				return `'${retval.slice(2)}`;
@@ -61,6 +61,8 @@ window.addEventListener('load', function(e){
         showXAxis:true,
         removeXAxisDomain: true,
         removeXAxisTickMarks: true,
+        removeYAxisDomain: true,
+        removeYAxisTickMarks: window.innerWidth > 849 ? true : false,
         ticks:{
             yAxis:3,
             xAxis: histoData_arr.length

@@ -91,7 +91,17 @@ class BarChart{
 				.attr("class", "y axis")
 				.attr(`transform`,`translate(${margin.left},${margin.top})`)
 				.call(yAxis)
-				.select('.domain').remove();
+			
+			// Maybe we don't want all those lines on the axis
+	        if (app.options.removeYAxisDomain){
+	        	d3.select('.y.axis').selectAll('.domain').remove();
+	        }
+
+	        // Maybe we don't want all those lines on the axis
+	        if (app.options.removeYAxisTickMarks){
+	        	d3.select('.y.axis').selectAll('.tick line').remove();
+	        	d3.select('.y.axis').selectAll('.tick text').attr('dx', '.7em');
+	        }
 		}
 		
 		if (app.options.showXAxis){
