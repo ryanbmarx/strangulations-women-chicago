@@ -152,7 +152,7 @@ module.exports = function drawVictimsMap(container, data){
 		}
 	);
 
-	L.tileLayer.provider('Stamen.TonerLite').addTo(map);
+	L.tileLayer.provider('CartoDB.Positron').addTo(map);
 
 	// ADDS CITY MASK
 	L.tileLayer( "http://media.apps.chicagotribune.com/maptiles/chicago-mask/{z}/{x}/{y}.png", { 
