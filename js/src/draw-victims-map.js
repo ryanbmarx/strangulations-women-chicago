@@ -90,14 +90,6 @@ function generateFoundSentence(v){
 	// Takes the data and crafts a "she was found naked in a ..." sentence
 	let retval = `<strong>${v.NAME.trim().toTitleCase()}</strong> was found `;
 
-	// if (v.CLOTHED) {
-	// 	if (v.CLOTHED.toUpperCase() == "YES") retval += "fully clothed";
-	// 	else if (v.CLOTHED.toUpperCase() == "NAKED") retval += "naked";
-	// 	else retval += "partially clothed";
-		
-	// 	retval += "</strong>";
-	// }
-
 	if (v.PLACE) retval += ` <strong>${v.PLACE}</strong>`;
 	retval += ". "
 	return retval;
@@ -131,6 +123,8 @@ function getVictimIcon(v){
 
 
 function restyleVictimMarkers(victimMarkers, o=1, r=5){	
+	// takes a marker set and restyles all markers therein with specified styles
+
 	victimMarkers.eachLayer( l => {
 		l.setStyle({
 			fillOpacity:o,
@@ -142,10 +136,10 @@ module.exports = function drawVictimsMap(container, data){
 	// draw the map.
 	let map = L.map(container,
 		{
-			zoom: 10,
-			center: [41.862013, -87.680716],
+			zoom: window.innerWidth < 850 ? 9 : 10,
+			center: window.innerWidth < 850 ? [41.862013, -87.680716] : [41.825, -87.431749], // Move off center when on desktop
 			scrollWheelZoom: false,
-			minZoom: 10,
+			minZoom: 9,
 			maxZoom: 16,
 		    renderer: L.canvas({padding:.05}), // You'll thank me for this when we start plotting dots
 			// maxBounds:L.latLngBounds([42.029693, -87.969885],[41.603010, -87.466239]) // Limit map to, roughly, the Cook County boundary. No getting lost on the map here.
@@ -157,7 +151,7 @@ module.exports = function drawVictimsMap(container, data){
 	// ADDS CITY MASK
 	L.tileLayer( "http://media.apps.chicagotribune.com/maptiles/chicago-mask/{z}/{x}/{y}.png", { 
 		maxZoom: 16, 
-		minZoom: 10, 
+		minZoom: 9, 
 		opacity: 0.5 
 	}).addTo(map);
 
@@ -194,13 +188,13 @@ module.exports = function drawVictimsMap(container, data){
 		const currentZoom = map.getZoom();
 		if (currentZoom >= 14){
 			// all the way in
-			restyleVictimMarkers(victimMarkers, .9, 14)
+			restyleVictimMarkers(masterVictimMarkers, .9, 14)
 		} else if (currentZoom >= 12){
 			// getting closer
-			restyleVictimMarkers(victimMarkers, .6, 12)
+			restyleVictimMarkers(masterVictimMarkers, .6, 12)
 		} else {
 			// default
-			restyleVictimMarkers(victimMarkers, .55, 6)
+			restyleVictimMarkers(masterVictimMarkers, .55, 6)
 		}
 	});
 
@@ -230,6 +224,7 @@ module.exports = function drawVictimsMap(container, data){
 				}
 			});	
 			try{
+				// Move the map to show all relevant markers
 				map.fitBounds(victimMarkers.getBounds());
 			}
 			catch(e){
