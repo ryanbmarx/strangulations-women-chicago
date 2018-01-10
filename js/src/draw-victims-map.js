@@ -199,7 +199,7 @@ module.exports = function drawVictimsMap(container, data){
 	});
 
 
-	document.querySelector('#year-slider').addEventListener('change', function(e){
+	document.querySelector('#year-slider').addEventListener('input', function(e){
 		// This powers the filter slider		
 		const chosenYear = this.value < 2001 ? "All years" : Math.floor(this.value,0);
 		
