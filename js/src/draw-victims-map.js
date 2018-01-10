@@ -4,6 +4,29 @@ import getTribColor from './getTribColors.js';
 import getJSDateFromExcel from './get-js-date-from-excel.js';
 import {timeFormat} from 'd3';
 
+function clickTrack(){
+    try{
+        const uniquePhrase = "Strangulations map click or slide";
+        s.linkTrackVars = "server,prop3,prop20,prop28,prop33,prop34,prop57,eVar3,eVar20,eVar21,eVar34,eVar35,eVar36,eVar37,eVar38,eVar39,eVar51";
+        s.linkTrackEvents = "";
+        s.prop57 = uniquePhrase;
+        s.tl(
+           // Since we're not actually tracking a link click, use true instead of `this`.  This also supresses a delay
+           true,
+           // linkType, 'o' for custom link
+           'o',
+           // linkName
+            uniquePhrase,
+           // variableOverrides
+           null
+        );
+    }
+    catch (ReferenceError){
+        console.warn('You must be running this locally. *OR* Omniture is not loaded. Skipping analytics.');
+    }
+
+}
+
 String.prototype.toSentenceCase = function(){
 	// returns string in sentence case (lower, except for first char)
 	let retval = this.toLowerCase();
@@ -198,7 +221,6 @@ module.exports = function drawVictimsMap(container, data){
 		}
 	});
 
-
 	document.querySelector('#year-slider').addEventListener('input', function(e){
 		// This powers the filter slider		
 		const chosenYear = this.value < 2001 ? "All years" : Math.floor(this.value,0);
@@ -231,6 +253,13 @@ module.exports = function drawVictimsMap(container, data){
 				// do nothing.
 			}
 		}
-	})
+	});
+
+	// If the slider has stopped sliding, link track
+	document.querySelector('#year-slider').addEventListener('change', clickTrack);
+	
+	// If a popup opens, link track
+	map.addEventListener('popupopen', clickTrack)
+
 
 }
