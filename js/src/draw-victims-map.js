@@ -137,7 +137,7 @@ module.exports = function drawVictimsMap(container, data){
 	let map = L.map(container,
 		{
 			zoom: window.innerWidth < 850 ? 9 : 10,
-			center: window.innerWidth < 850 ? [41.862013, -87.680716] : [41.825, -87.431749], // Move off center when on desktop
+			center: window.innerWidth < 850 ? [41.862013, -87.680716] : [41.825, -87.5], // Move off center when on desktop
 			scrollWheelZoom: false,
 			minZoom: 9,
 			maxZoom: 16,
