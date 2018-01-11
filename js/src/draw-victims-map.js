@@ -132,8 +132,8 @@ function getVictimIcon(v){
 	// At present, there is no conditional styling, 
 	// but we're requiring the v object just in case.
 
-	const 	caseClosedColor = getTribColor('trib-red2'),
-			caseOpenColor = getTribColor('trib-orange');
+	const 	caseClosedColor = getTribColor('trib-orange'),
+			caseOpenColor = getTribColor('trib-red2');
 
 	return {
 		stroke: false,
