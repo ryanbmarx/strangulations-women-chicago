@@ -3,6 +3,8 @@ import BarChart from './bar-chart.js';
 import getJSDateFromExcel from './get-js-date-from-excel.js';
 import countBy from "lodash.countby";
 
+
+
 window.addEventListener('load', function(e){
 	drawVictimsMap(document.querySelector('#map'), window.victims);
 
@@ -27,8 +29,7 @@ window.addEventListener('load', function(e){
 
 	histoData_arr.sort((a,b) => a.year - b.year);
 	function yearFormat(year){
-
-		if (window.innerWidth < 650 || window.innerWidth >= 850){
+        if(document.querySelector('.histogram').getBoundingClientRect().width < 450){
 			if (year % 2 != 0) {
 				let retval = year.toString();
 				return `'${retval.slice(2)}`;
@@ -62,7 +63,7 @@ window.addEventListener('load', function(e){
         removeXAxisDomain: true,
         removeXAxisTickMarks: true,
         removeYAxisDomain: true,
-        removeYAxisTickMarks: window.innerWidth > 849 ? true : false,
+        removeYAxisTickMarks: document.querySelector('.histogram').getBoundingClientRect().width < 450 ? true : false,
         ticks:{
             yAxis:3,
             xAxis: histoData_arr.length

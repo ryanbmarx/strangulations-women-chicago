@@ -1,5 +1,8 @@
 # Strangulations women
 
+Case resolved versus closed?
+
+
 A [Tarbell](http://tarbell.io) project that publishes to a P2P HTML Story.
 
 Assumptions

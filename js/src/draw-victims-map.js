@@ -155,12 +155,13 @@ function restyleVictimMarkers(victimMarkers, o=1, r=5){
 		});
 	});	
 }
+
 module.exports = function drawVictimsMap(container, data){
 	// draw the map.
 	let map = L.map(container,
 		{
-			zoom: window.innerWidth < 850 ? 9 : 10,
-			center: window.innerWidth < 850 ? [41.862013, -87.680716] : [41.825, -87.5], // Move off center when on desktop
+			zoom: window.innerWidth < window.desktopMinWidth ? 9 : 10,
+			center: window.innerWidth < window.desktopMinWidth ? [41.862013, -87.680716] : [41.825, -87.5], // Move off center when on desktop
 			scrollWheelZoom: false,
 			minZoom: 9,
 			maxZoom: 16,
